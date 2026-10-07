@@ -60,7 +60,7 @@ Sales_Data_Analysis/
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone git clone https://github.com/RiyaGirdhar30/Sales-Data-Analysis.git
 ```
 
 ### 2. Navigate to the project folder
