@@ -92,6 +92,12 @@ if "category_filter" not in st.session_state:
 if "region_filter" not in st.session_state:
     st.session_state["region_filter"] = "All"
 
+if "start_date_filter" not in st.session_state:
+    st.session_state["start_date_filter"] = df["Order Date"].min().date()
+
+if "end_date_filter" not in st.session_state:
+    st.session_state["end_date_filter"] = df["Order Date"].max().date()
+
 # Reset filters
 if st.sidebar.button("🔄 Reset Filters"):
     st.session_state["category_filter"] = "All"
@@ -119,7 +125,6 @@ selected_region = st.sidebar.selectbox(
     region_options,
     key="region_filter"
 )
-
 
 # Get the minimum and maximum dates from the dataset
 min_date = df["Order Date"].min().date()
