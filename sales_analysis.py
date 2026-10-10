@@ -135,6 +135,182 @@ sales_std = np.std(df["Sales"])
 print("\nSales Standard Deviation:")
 print(sales_std)
 
+# Find high-value orders
+high_value_orders = df[df["Sales"] > 10000]
+
+print("\nHigh-Value Orders:")
+print(high_value_orders)
+
+# Sort high-value orders by sales
+high_value_orders = high_value_orders.sort_values(
+    by="Sales",
+    ascending=False
+)
+
+print("\nHigh-Value Orders Sorted by Sales:")
+print(high_value_orders)
+
+# Find the top 5 highest-value orders
+top_5_orders = high_value_orders.head(5)
+
+print("\nTop 5 Highest-Value Orders:")
+print(top_5_orders)
+
+# Find the 5 lowest-value orders
+lowest_5_orders = df.sort_values(
+    by="Sales",
+    ascending=True
+).head(5)
+
+print("\n5 Lowest-Value Orders:")
+print(lowest_5_orders)
+
+# Filter Electronics orders
+electronics_sales = df[df["Category"] == "Electronics"]
+
+print("\nElectronics Orders:")
+print(electronics_sales)
+
+# Calculate total Electronics sales
+electronics_total_sales = electronics_sales["Sales"].sum()
+
+print("\nTotal Electronics Sales:")
+print(electronics_total_sales)
+
+# Calculate average Electronics order value
+electronics_average_order = electronics_sales["Sales"].mean()
+
+print("\nAverage Electronics Order Value:")
+print(electronics_average_order)
+
+# Find high-value Electronics orders
+high_value_electronics = df[
+    (df["Category"] == "Electronics") &
+    (df["Sales"] > 10000)
+]
+
+print("\nHigh-Value Electronics Orders:")
+print(high_value_electronics)
+
+# Find Electronics or Furniture orders
+electronics_or_furniture = df[
+    (df["Category"] == "Electronics") |
+    (df["Category"] == "Furniture")
+]
+
+print("\nElectronics or Furniture Orders:")
+print(electronics_or_furniture)
+
+# Filter selected categories using isin()
+selected_categories = df[
+    df["Category"].isin(["Electronics", "Furniture"])
+]
+
+print("\nSelected Categories:")
+print(selected_categories)
+
+# Sort all orders by sales
+sales_sorted = df.sort_values(
+    by="Sales",
+    ascending=False
+)
+
+print("\nAll Orders Sorted by Sales:")
+print(sales_sorted)
+
+# Find the top 10 highest-value orders
+top_10_orders = sales_sorted.head(10)
+
+print("\nTop 10 Highest-Value Orders:")
+print(top_10_orders)
+
+# Calculate total quantity sold by product
+product_quantity = df.groupby("Product")["Quantity"].sum()
+
+print("\nTotal Quantity Sold by Product:")
+print(product_quantity)
+
+# Find the most-sold product by quantity
+most_sold_product = product_quantity.idxmax()
+most_sold_quantity = product_quantity.max()
+
+print("\nMost-Sold Product by Quantity:")
+print(most_sold_product)
+print("Total Quantity Sold:", most_sold_quantity)
+
+# Calculate average price by product
+average_price_by_product = df.groupby("Product")["Price"].mean()
+
+print("\nAverage Price by Product:")
+print(average_price_by_product)
+
+# Create a complete product summary
+product_summary = df.groupby("Product").agg(
+    Total_Sales=("Sales", "sum"),
+    Total_Quantity=("Quantity", "sum"),
+    Average_Price=("Price", "mean")
+)
+
+print("\nProduct Summary:")
+print(product_summary)
+
+# Find the best-selling product by revenue
+best_product = product_summary["Total_Sales"].idxmax()
+best_product_sales = product_summary["Total_Sales"].max()
+
+print("\nBest-Selling Product by Revenue:")
+print(best_product)
+print("Total Sales:", best_product_sales)
+
+# Find the product with the highest quantity sold
+most_sold_product = product_summary["Total_Quantity"].idxmax()
+most_sold_quantity = product_summary["Total_Quantity"].max()
+
+print("\nProduct with Highest Quantity Sold:")
+print(most_sold_product)
+print("Total Quantity Sold:", most_sold_quantity)
+
+# Calculate sales contribution percentage by product
+product_summary["Sales_Percentage"] = (
+    product_summary["Total_Sales"] / df["Sales"].sum()
+) * 100
+
+print("\nProduct Sales Contribution:")
+print(product_summary)
+
+# Create a complete category summary
+category_summary = df.groupby("Category").agg(
+    Total_Sales=("Sales", "sum"),
+    Total_Quantity=("Quantity", "sum"),
+    Average_Price=("Price", "mean")
+)
+
+print("\nCategory Summary:")
+print(category_summary)
+
+# Find the best-selling category by revenue
+best_category = category_summary["Total_Sales"].idxmax()
+best_category_sales = category_summary["Total_Sales"].max()
+
+print("\nBest-Selling Category by Revenue:")
+print(best_category)
+print("Total Sales:", best_category_sales)
+
+# Find the category with the highest quantity sold
+most_sold_category = category_summary["Total_Quantity"].idxmax()
+most_sold_category_quantity = category_summary["Total_Quantity"].max()
+
+print("\nCategory with Highest Quantity Sold:")
+print(most_sold_category)
+print("Total Quantity Sold:", most_sold_category_quantity)
+
+# Calculate sales contribution percentage by category
+category_summary["Sales_Percentage"] = (
+    category_summary["Total_Sales"] / df["Sales"].sum()
+) * 100
+
+print("\nCategory Sales Contribution:")
+print(category_summary)
 
 # ==============================
 # DATA VISUALIZATION
